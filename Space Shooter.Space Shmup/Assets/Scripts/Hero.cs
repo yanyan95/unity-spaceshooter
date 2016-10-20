@@ -6,6 +6,9 @@ public class Hero : MonoBehaviour {
     static public Hero
             S;  //singleton
 
+    public float
+        gameRestartDelay = 2f;
+
     //these fields control the movement of the ship
     public float
         speed = 30;
@@ -105,6 +108,8 @@ public class Hero : MonoBehaviour {
             //	If	the	shield	is	going	to	be	set	to	less	than	zero	
             if	(value	<	0)	{												
             Destroy(this.gameObject);
+                //tell Main.S to restart the game after a delay
+                Main.S.DelayedRestart(gameRestartDelay);
         }
     }
 } 
