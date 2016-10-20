@@ -21,9 +21,13 @@ public class Hero : MonoBehaviour {
     public bool
         ____________________________;
 
+    public Bounds
+        bounds;
+
     void Awake ()
     {
         S = this; //set the singleton
+        bounds = Utils.CombineBoundsOfChildren(this.gameObject);
     }
 	
 
