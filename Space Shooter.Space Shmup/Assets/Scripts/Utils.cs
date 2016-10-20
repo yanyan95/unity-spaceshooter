@@ -7,11 +7,11 @@ public enum	BoundsTest	{
     center,                     //	Is	the	center	of	the	GameObject	on	screen?				
     onScreen,               //	Are	the	bounds	entirely	on	screen?				
     offScreen				//	Are	the	bounds	entirely	off	screen? 
-} 
+}
 
 public class Utils : MonoBehaviour {
 
-//=========================== Bounds Functions ==========================\\
+    //=========================== Bounds Functions ==========================\\
 
     //creates bounds that encapsulate the two bounds passed in
     public static Bounds BoundsUnion(Bounds b0, Bounds b1)
@@ -41,13 +41,13 @@ public class Utils : MonoBehaviour {
         //create an empty Bounds b
         Bounds b = new Bounds(Vector3.zero, Vector3.zero);
         //if this GameObject has a renderer component...
-        if(go.GetComponent<Renderer>() != null)
+        if (go.GetComponent<Renderer>() != null)
         {
             //expand b to contian the renderer's bounds
             b = BoundsUnion(b, go.GetComponent<Renderer>().bounds);
         }
         //if this GameObject has a collider component...
-        if(go.GetComponent<Collider>() != null)
+        if (go.GetComponent<Collider>() != null)
         {
             //expand b to contain the collider's bounds
             b = BoundsUnion(b, go.GetComponent<Collider>().bounds);
@@ -68,7 +68,7 @@ public class Utils : MonoBehaviour {
         get
         {
             //if_camBounds hasn't been set yet
-            if(_camBounds.size == Vector3.zero)
+            if (_camBounds.size == Vector3.zero)
             {
                 //SetCameraBounds using the default Camera
                 SetCameraBounds();
@@ -82,7 +82,7 @@ public class Utils : MonoBehaviour {
     static private Bounds _camBounds;
 
     //this function is used by camBounds to set _camBounds and can also be called directly
-    public static void SetCameraBounds(Camera cam=null)
+    public static void SetCameraBounds(Camera cam = null)
     {
         //if no camera was passed in, use the main camera
         if (cam == null) cam = Camera.main;
@@ -112,103 +112,103 @@ public class Utils : MonoBehaviour {
 
 
     //	Checks to see	whether	the	Bounds	bnd	are	within	the	camBounds
-    public	static	Vector3	ScreenBoundsCheck(Bounds bnd, BoundsTest test =	BoundsTest.center)	{
-        return (BoundsInBoundsCheck(camBounds,bnd,test));
+    public static Vector3 ScreenBoundsCheck(Bounds bnd, BoundsTest test = BoundsTest.center) {
+        return (BoundsInBoundsCheck(camBounds, bnd, test));
     }
     //	Checks to see	whether	Bounds lilB	are	within	Bounds	bigB				
-    public	static	Vector3	BoundsInBoundsCheck(Bounds	bigB,Bounds	lilB, BoundsTest test =	BoundsTest.onScreen	)	{
+    public static Vector3 BoundsInBoundsCheck(Bounds bigB, Bounds lilB, BoundsTest test = BoundsTest.onScreen) {
         //	The	behavior of	this function is different	based on the BoundsTest								
         //	that has been selected.								
 
         //	Get	the	center	of	lilB								
-        Vector3	pos	=	lilB.center;
+        Vector3 pos = lilB.center;
 
         //	Initialize	the	offset	at	[0,0,0]								
-        Vector3	off	=	Vector3.zero;
+        Vector3 off = Vector3.zero;
 
-        switch	(test)	{
+        switch (test) {
             //	The	center	test	determines	what	off	(offset)	would	have	to	be applied								
             //		to	lilB	to	move	its	center	back	inside	bigB								
-         case	BoundsTest.center:
-                if	(bigB.Contains(	pos	))	{
-                    return (	Vector3.zero	);
+            case BoundsTest.center:
+                if (bigB.Contains(pos)) {
+                    return (Vector3.zero);
                 }
 
-                if	(pos.x	>	bigB.max.x)	{
-                    off.x	=	pos.x	-	bigB.max.x;
+                if (pos.x > bigB.max.x) {
+                    off.x = pos.x - bigB.max.x;
                 }
-                else if	(pos.x	<	bigB.min.x)	{
-                    off.x	=	pos.x	-	bigB.min.x;
+                else if (pos.x < bigB.min.x) {
+                    off.x = pos.x - bigB.min.x;
                 }
-                if	(pos.y	>	bigB.max.y)	{
-                    off.y	=	pos.y	-	bigB.max.y;
+                if (pos.y > bigB.max.y) {
+                    off.y = pos.y - bigB.max.y;
                 }
-                else if	(pos.y	<	bigB.min.y)	{
-                    off.y	=	pos.y	-	bigB.min.y;
+                else if (pos.y < bigB.min.y) {
+                    off.y = pos.y - bigB.min.y;
                 }
-                if	(pos.z	>	bigB.max.z)	{
-                    off.z	=	pos.z	-	bigB.max.z;
+                if (pos.z > bigB.max.z) {
+                    off.z = pos.z - bigB.max.z;
                 }
-                else if	(pos.z	<	bigB.min.z)	{
-                    off.z	=	pos.z	-	bigB.min.z;
+                else if (pos.z < bigB.min.z) {
+                    off.z = pos.z - bigB.min.z;
                 }
-                return (	off	);
+                return (off);
 
 
             //	The	onScreen	test	determines	what	off	would	have	to	be	applied to								
             //	keep all of	lilB inside	bigB							
             case BoundsTest.onScreen:
-                if	(bigB.Contains(lilB.min) &&	bigB.Contains(lilB.max))	{
-                    return (	Vector3.zero	);
+                if (bigB.Contains(lilB.min) && bigB.Contains(lilB.max)) {
+                    return (Vector3.zero);
                 }
 
-                if	(lilB.max.x	>	bigB.max.x)	{
-                    off.x	=	lilB.max.x	-	bigB.max.x;
+                if (lilB.max.x > bigB.max.x) {
+                    off.x = lilB.max.x - bigB.max.x;
                 }
-                else if	(lilB.min.x	<	bigB.min.x)	{
-                    off.x	=	lilB.min.x	-	bigB.min.x;
+                else if (lilB.min.x < bigB.min.x) {
+                    off.x = lilB.min.x - bigB.min.x;
                 }
-                if	(lilB.max.y	>	bigB.max.y)	{
-                    off.y	=	lilB.max.y	-	bigB.max.y;
+                if (lilB.max.y > bigB.max.y) {
+                    off.y = lilB.max.y - bigB.max.y;
                 }
-                else if	(lilB.min.y	< bigB.min.y)	{
-                    off.y	=	lilB.min.y	-	bigB.min.y;
+                else if (lilB.min.y < bigB.min.y) {
+                    off.y = lilB.min.y - bigB.min.y;
                 }
-				if	(lilB.max.z	>	bigB.max.z)	{
-                    off.z	=	lilB.max.z	-	bigB.max.z;
+                if (lilB.max.z > bigB.max.z) {
+                    off.z = lilB.max.z - bigB.max.z;
                 }
-                else if	(lilB.min.z<bigB.min.z)	{
-                    off.z	=	lilB.min.z	-	bigB.min.z;
+                else if (lilB.min.z < bigB.min.z) {
+                    off.z = lilB.min.z - bigB.min.z;
                 }
-                return (	off	);
+                return (off);
 
 
             //	The	offScreen test	determines	what off would	need to	be applied	to	
             //	move any tiny part	of	lilB inside	of	bigB								
             case BoundsTest.offScreen:
-                bool cMin =	bigB.Contains(lilB.min);
-                bool cMax =	bigB.Contains(lilB.max);
-                if	(	cMin	||	cMax	)	{
+                bool cMin = bigB.Contains(lilB.min);
+                bool cMax = bigB.Contains(lilB.max);
+                if (cMin || cMax) {
                     return (Vector3.zero);
                 }
 
-                if	(lilB.min.x	>	bigB.max.x)	{
-                    off.x	=	lilB.min.x	-	bigB.max.x;
+                if (lilB.min.x > bigB.max.x) {
+                    off.x = lilB.min.x - bigB.max.x;
                 }
-                else if	(lilB.max.x	<	bigB.min.x)	{
-                    off.x	=	lilB.max.x	-	bigB.min.x;
+                else if (lilB.max.x < bigB.min.x) {
+                    off.x = lilB.max.x - bigB.min.x;
                 }
-                if	(lilB.min.y	>	bigB.max.y)	{
-                    off.y	=	lilB.min.y	-	bigB.max.y;
+                if (lilB.min.y > bigB.max.y) {
+                    off.y = lilB.min.y - bigB.max.y;
                 }
-                else if	(lilB.max.y	<	bigB.min.y)	{
-                    off.y	=	lilB.max.y	-	bigB.min.y;
+                else if (lilB.max.y < bigB.min.y) {
+                    off.y = lilB.max.y - bigB.min.y;
                 }
-                if	(lilB.min.z	>	bigB.max.z)	{
-                    off.z	=	lilB.min.z	-	bigB.max.z;
+                if (lilB.min.z > bigB.max.z) {
+                    off.z = lilB.min.z - bigB.max.z;
                 }
-                else if	(lilB.max.z	<	bigB.min.z)	{
-                    off.z	=	lilB.max.z	-	bigB.min.z;
+                else if (lilB.max.z < bigB.min.z) {
+                    off.z = lilB.max.z - bigB.min.z;
                 }
                 return (off);
         }
@@ -220,25 +220,40 @@ public class Utils : MonoBehaviour {
     //============================	Transform Functions	===========================\\				
     //This	function will iteratively climb	up	the	transform.parent tree				
     //until	it	either	finds a	parent	with a tag	!=	"Untagged"	or	no parent				
-    public	static	GameObject	FindTaggedParent(GameObject go)	{
+    public static GameObject FindTaggedParent(GameObject go) {
         //If this gameObject has a tag								
-        if	(go.tag	!=	"Untagged")	{
+        if (go.tag != "Untagged") {
             //then return this gameObject												
             return (go);
         }
         //If there is no parent	of	this Transform								
-        if	(go.transform.parent	==	null)	{
+        if (go.transform.parent == null) {
             //We've reached	the	top	of	the	hierarchy with	no	interesting tag		
             //So return	null												
             return (null);
         }
         //Otherwise,recursively	climb up the tree								
-        return (FindTaggedParent(go.transform.parent.gameObject));							
-        }				
+        return (FindTaggedParent(go.transform.parent.gameObject));
+    }
     //	This version of	the	function handles things	if	a Transform	is passed	in
-    public static GameObject FindTaggedParent(Transform t){   
-        return(	FindTaggedParent(t.gameObject)	);
+    public static GameObject FindTaggedParent(Transform t) {
+        return (FindTaggedParent(t.gameObject));
+    }
+
+    //===========================	Materials Functions	============================\\				
+    //	Returns	a	list	of	all	Materials	on	this	GameObject	or	its	children	
+    static	public	Material[]	GetAllMaterials(GameObject	go)	{
+        List<Material>	mats	=	new	List<Material>();
+        if	(go.GetComponent<Renderer>()	!=	null)	{
+            mats.Add(go.GetComponent<Renderer>().material);
+        }
+        foreach (Transform	t	in	go.transform)	{
+            mats.AddRange(	GetAllMaterials(t.gameObject)	);
+        }
+        return (mats.ToArray());
     } 
 
+}
 
-    }
+
+
