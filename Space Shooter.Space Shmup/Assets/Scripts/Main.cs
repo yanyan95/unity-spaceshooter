@@ -12,11 +12,15 @@ public class Main : MonoBehaviour {
     public float 
         enemySpawnPerSecond = 0.5f;   //# Enemies/second				
     public	float												
-        enemySpawnPadding	=	1.5f;   //Padding for position		
+        enemySpawnPadding	=	1.5f;   //Padding for position
+    public WeaponDefinition[]
+        weaponDefinitions;		
     		
     public	bool	
         ________________;
 
+    public WeaponType[]
+        activeWeaponTypes;
     public	float												
         enemySpawnRate; //Delay	between	Enemy spawns				
 
@@ -29,6 +33,13 @@ public class Main : MonoBehaviour {
         //Invoke call SpawnEnemy()	once after a 2 second delay								
         Invoke("SpawnEnemy", enemySpawnRate);	
         }
+
+    void Start() {
+        activeWeaponTypes = new WeaponType[weaponDefinitions.Length];
+        for (int i = 0; i < weaponDefinitions.Length; i++) {
+            activeWeaponTypes[i] = weaponDefinitions[i].type;
+        }
+    }
 
     public void SpawnEnemy()	{
         //Pick a random	Enemy prefab to	instantiate								
