@@ -15,8 +15,8 @@ public class Hero : MonoBehaviour {
         pitchMult = 30;
 
     //ship status information
-    public float
-        shieldLevel = 1;
+    private float
+        _shieldLevel = 1;
 
     public bool
         ____________________________;
@@ -57,4 +57,56 @@ public class Hero : MonoBehaviour {
         //rotate the ship to make it feel more dynamic
         transform.rotation = Quaternion.Euler(yAxis * pitchMult, xAxis * rollMult, 0);
 	}
+
+
+    //This	variable holds	a reference	to	the	last triggering	GameObject				
+    public	GameObject	lastTriggerGo	= null;
+
+
+    void OnTriggerEnter(Collider other) {
+        //Find	the	tag	of	other.gameObject or	its	parent	GameObjects	
+        GameObject go = Utils.FindTaggedParent(other.gameObject);
+        //If there	is a parent	with a	tag								
+        if (go != null) {
+            //Make	sure it's not	the	same triggering	go	as	last	time
+            if (go == lastTriggerGo)
+            {
+                return;
+            }
+            lastTriggerGo = go;
+            
+        if (go.tag == "Enemy")
+            {
+                //if the shield was triggered by an enemy
+                //decrease the level of the shield by 1
+                _shieldLevel--;
+                //destroy the enemy
+                Destroy(go);
+            }																												
+        
+        else {
+            print("Triggered:	" + go.name);
+        }
+    }
+        
+        else	{
+            //Otherwise	announce the original other.gameObject
+            print("Triggered:	"+other.gameObject.name);   
+        }	
+    }
+
+
+    public float shieldLevel {
+        get {
+            return (_shieldLevel);                                                                                                                                  
+           }
+        set	{
+            _shieldLevel	=	Mathf.Min(	value,	4	);
+            //	If	the	shield	is	going	to	be	set	to	less	than	zero	
+            if	(value	<	0)	{												
+            Destroy(this.gameObject);
+        }
+    }
+} 
+
 }
