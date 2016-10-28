@@ -126,11 +126,15 @@ public	class	Weapon	:	MonoBehaviour	{
             go.tag = "ProjectileHero";
             go.layer = LayerMask.NameToLayer("ProjectileHero");
         }
-        else { go.tag = "ProjectileEnemy"; go.layer = LayerMask.NameToLayer("ProjectileEnemy");
+        else {
+            go.tag = "ProjectileEnemy";
+            go.layer = LayerMask.NameToLayer("ProjectileEnemy");
         }
         go.transform.position = collar.transform.position;
         go.transform.parent = PROJECTILE_ANCHOR;
         Projectile p = go.GetComponent<Projectile>();
-        p.type = type; lastShot = Time.time; return (p);
+        p.type = type;
+        lastShot = Time.time;
+        return (p);
     } 
 } 
