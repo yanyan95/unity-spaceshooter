@@ -55,10 +55,10 @@ public class Hero : MonoBehaviour {
         bounds.center = transform.position;
 
         //Keep the	ship constrained to	the	screen	bounds								
-        Vector3	off	=	Utils.ScreenBoundsCheck(bounds, BoundsTest.onScreen);
-        if	(	off	!=	Vector3.zero	)	{
+        Vector3	off	= Utils.ScreenBoundsCheck(bounds, BoundsTest.onScreen);
+        if	(off!=	Vector3.zero)	{
             pos	-=	off;
-            transform.position	=	pos;
+            transform.position = pos;
         }	
 
 
@@ -116,7 +116,7 @@ public class Hero : MonoBehaviour {
             return (_shieldLevel);                                                                                                                                  
            }
         set	{
-            _shieldLevel	=	Mathf.Min(	value,	4	);
+            _shieldLevel =	Mathf.Min(value, 4);
             //	If	the	shield	is	going	to	be	set	to	less	than	zero	
             if	(value	<	0)	{												
             Destroy(this.gameObject);

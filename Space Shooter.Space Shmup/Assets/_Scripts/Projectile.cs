@@ -8,7 +8,7 @@ public class Projectile : MonoBehaviour {
         _type;
     //This	public	property masks	the	field	_type	&	takes	action	when it is	set	
     public	WeaponType				
-        type	{
+        type {
         get	{
             return (_type);
         }
@@ -17,16 +17,16 @@ public class Projectile : MonoBehaviour {
         }
     }
 
-    void	Awake()	{
+    void Awake()	{
         //Test	to	see	whether	this has passed	off	screen	every	2	seconds	
         InvokeRepeating("CheckOffscreen",2f,2f);
     }
 
-    public	void SetType(WeaponType	eType)	{
+    public void SetType(WeaponType	eType)	{
         //Set	the	_type								
-        _type	=	eType;
+        _type =	eType;
         WeaponDefinition def =	Main.GetWeaponDefinition(_type);
-        GetComponent<Renderer>().material.color	=	def.projectileColor;
+        GetComponent<Renderer>().material.color	= def.projectileColor;
     }
 
     void CheckOffscreen()	{

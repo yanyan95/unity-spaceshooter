@@ -184,7 +184,7 @@ public class Utils : MonoBehaviour {
 
 
             //	The	offScreen test	determines	what off would	need to	be applied	to	
-            //	move any tiny part	of	lilB inside	of	bigB								
+            //	move any tiny part of lilB inside of bigB								
             case BoundsTest.offScreen:
                 bool cMin = bigB.Contains(lilB.min);
                 bool cMax = bigB.Contains(lilB.max);
@@ -247,8 +247,8 @@ public class Utils : MonoBehaviour {
         if	(go.GetComponent<Renderer>()	!=	null)	{
             mats.Add(go.GetComponent<Renderer>().material);
         }
-        foreach (Transform	t	in	go.transform)	{
-            mats.AddRange(	GetAllMaterials(t.gameObject)	);
+        foreach (Transform	t in go.transform)	{
+            mats.AddRange(GetAllMaterials(t.gameObject));
         }
         return (mats.ToArray());
     } 
