@@ -5,13 +5,13 @@ public class PowerUp : MonoBehaviour {
     //This	is	an	unusual	but	handy use of Vector2s. x holds a min value
     //and y	a max value	for	a Random.Range() that will be	called	later				
     public	Vector2											
-        rotMinMax	=	new	Vector2(15,90);
+        rotMinMax =	new	Vector2(15,90);
     public	Vector2											
-        driftMinMax	=	new	Vector2(.25f,2);
+        driftMinMax	= new	Vector2(.25f,2);
     public	float													
-        lifeTime	=	6f; //	Seconds	the	PowerUp	exists				
+        lifeTime =	6f; //	Seconds	the	PowerUp	exists				
     public	float													
-        fadeTime	=	4f; //	Seconds	it	will then fade				
+        fadeTime =	4f; //	Seconds	it	will then fade				
     public	bool	
         ________________;
     public	WeaponType								
@@ -61,7 +61,7 @@ public class PowerUp : MonoBehaviour {
     void Update	()	{
         //	Manually rotate	the	Cube child	every Update()	
         //	Multiplying	it by Time.time	causes	the	rotation to	be	timebased	
-        cube.transform.rotation	=Quaternion.Euler(rotPerSecond* Time.time);
+        cube.transform.rotation	=Quaternion.Euler(rotPerSecond*Time.time);
 
         //	Fade out the PowerUp over time								
         //	Given the default values,	a PowerUp	will exist	for	10	seconds	
