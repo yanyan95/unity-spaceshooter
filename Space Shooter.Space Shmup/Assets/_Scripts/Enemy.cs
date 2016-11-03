@@ -13,6 +13,9 @@ public class Enemy : MonoBehaviour {
 
     public int showDamageForFrames = 2;   //# frames to show damage			
 
+    public float
+        powerUpDropChance = 1f;   //chance to drop a power-up
+
     public	bool	________________;
 
     public Color[]
@@ -110,6 +113,8 @@ public class Enemy : MonoBehaviour {
                 //	Get	the	damage	amount	from the Projectile.type &	Main.W_DEFS		
                 health -= Main.W_DEFS[p.type].damageOnHit;
                 if (health <= 0) {
+                    //tell the main singleton that this ship has been destroyed 
+                    Main.S.ShipDestroyed(this);
                     //	Destroy	this Enemy			
                     Destroy(this.gameObject);
                 }
